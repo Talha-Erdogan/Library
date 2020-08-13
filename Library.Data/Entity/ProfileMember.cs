@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Library.Data.Entity
 {
-    [Table("ProfileEmployee")]
-    public class ProfileEmployee
+    [Table("ProfileMember")]
+    public class ProfileMember
     {
         [Key]
         [Column("Id")]
@@ -17,6 +17,6 @@ namespace Library.Data.Entity
         public int ProfileId { get; set; }
 
         [Required]
-        public int EmployeeId { get; set; }
+        public int MemberId { get; set; }
     }
 }

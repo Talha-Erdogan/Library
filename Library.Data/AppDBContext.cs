@@ -34,6 +34,6 @@ namespace Library.Data
         public DbSet<Member> Member { get; set; }
         public DbSet<Profile> Profile { get; set; }
         public DbSet<ProfileDetail> ProfileDetail { get; set; }
-        public DbSet<ProfileEmployee> ProfileEmployee { get; set; }
+        public DbSet<ProfileMember> ProfileMember { get; set; }
     }
 }
