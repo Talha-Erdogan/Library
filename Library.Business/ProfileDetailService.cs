@@ -26,11 +26,11 @@ namespace Library.Business
             using (AppDBContext dbContext = new AppDBContext(_config))
             {
                 var query = from pd in dbContext.ProfileDetail
-                            join pe in dbContext.ProfileEmployee on pd.ProfileId equals pe.ProfileId
+                            join pm in dbContext.ProfileMember on pd.ProfileId equals pm.ProfileId
                             join a in dbContext.Auth on pd.AuthId equals a.Id
                             join p in dbContext.Profile on pd.ProfileId equals p.Id
                             where
-                                pe.EmployeeId == employeeId && p.IsDeleted == false && a.IsDeleted == false
+                                pm.MemberId == employeeId && p.IsDeleted == false && a.IsDeleted == false
                             select a;
 
                 // as no tracking

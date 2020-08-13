@@ -1,48 +1,193 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Library.UI</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Library (Talha ERDOGAN)</title>
+    <!-- Favicon-->
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="~/theme/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+   
+    <!-- Waves Effect Css -->
+    <link href="~/theme/css/waves.css" rel="stylesheet" />
+    <link href="~/theme/css/waves.min.css" rel="stylesheet" />
+   
+    <!-- Animation Css -->
+    <link href="~/theme/css/animate.css" rel="stylesheet" />
+    <link href="~/theme/css/animate.min.css" rel="stylesheet" />
+   
+    <!-- Morris Chart Css-->
+    <link href="~/theme/css/morris.css" rel="stylesheet" />
+   
+    <!-- Custom Css -->
+    <link href="~/theme/css/style.css" rel="stylesheet" />
+    <link href="~/theme/css/style.min.css" rel="stylesheet" />
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="~/theme/css/all-themes.css" rel="stylesheet" />
+    <link href="~/theme/css/all-themes.min.css" rel="stylesheet" />
+
+    <!-- Sweet Alert Css -->
+    <link href="~/theme/css/sweetalert.css" rel="stylesheet" />
+   
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Library.UI</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+<body class="theme-orange">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Library.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <p>Loading...</p>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="Search...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="#">Talha ERDOGAN(Library)</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+                    <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                    <!-- #END# Call Search -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="~/MemberImages/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:black;">Talha ERDOĞAN</div>
+                    <div class="email" style="color:black;">https://github.com/Talha-Erdogan</div>
+                  
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">Menu</li>
+                    <li class="active">
+                        <a href="#">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="@Url.Action("List","Category")">
+                            <i class="material-icons">text_fields</i>
+                            <span>Category</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="@Url.Action("List","Book")">
+                            <i class="material-icons">layers</i>
+                            <span>Book</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Member</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="@Url.Action("List","Member")">Member</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("List","BorrowBook")">Received Book List</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("BroughtBookList","BorrowBook")">Brought Book List</a>
+                            </li>
+                        </ul>
+                    </li>
+                   
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; @DateTime.Now.Year <a href="javascript:void(0);">Design By Talha ERDOĞAN</a>.
+                </div>
+                
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="~/theme/scripts/jquery.js"></script>
+    <script src="~/theme/scripts/jquery.min.js"></script>
+    <script src="~/theme/scripts/jquery.js"></script>
+   
+    <!-- Bootstrap Core Js -->
+    <script src="~/theme/scripts/bootstrap.js"></script>
+    <script src="~/theme/scripts/bootstrap.min.js"></script>
+   
+    <!-- Select Plugin Js -->
+    <script src="~/theme/scripts/bootstrap-select.min.js"></script>
+    <script src="~/theme/scripts/bootstrap-select.js"></script>
+    
+    <!-- Slimscroll Plugin Js -->
+    <script src="~/theme/scripts/jquery.slimscroll.js"></script>
+   
+    <!-- Waves Effect Plugin Js -->
+    <script src="~/theme/scripts/waves.js"></script>
+    <script src="~/theme/scripts/waves.min.js"></script>
+
+    <!-- Custom Js -->
+    <script src="~/theme/scripts/admin.js"></script>
+
+    <script src="~/theme/scripts/sweetalert.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
