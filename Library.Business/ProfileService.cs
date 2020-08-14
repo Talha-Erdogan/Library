@@ -77,6 +77,7 @@ namespace Library.Business
             using (AppDBContext dbContext = new AppDBContext(_config))
             {
                 var profile = dbContext.Profile.Where(x => x.Id == id).FirstOrDefault();
+                profile.IsDeleted = true;
                 profile.DeletedBy = deletedBy;
                 profile.DeletedDateTime = DateTime.Now;
                 dbContext.Entry(profile).State = EntityState.Modified;
