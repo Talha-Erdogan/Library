@@ -59,6 +59,10 @@ namespace Library.UI.Controllers
             ViewBag.Issuccess = IsSuccess ?? "Empty";
             var model = new AddViewModel();
             Auth auth = _authService.GetById(id);
+            if (auth == null)
+            {
+                return View("_ErrorNotExist");
+            }
             model.Id = auth.Id;
             model.Name = auth.Name;
             model.Code = auth.Code;
@@ -72,6 +76,10 @@ namespace Library.UI.Controllers
             try
             {
                 var auth = _authService.GetById(model.Id);
+                if (auth == null)
+                {
+                    return View("_ErrorNotExist");
+                }
                 auth.Code = model.Code;
                 auth.Name = model.Name;
                 _authService.Update(auth);

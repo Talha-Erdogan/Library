@@ -1,46 +1,50 @@
 ﻿
 @{
-    ViewBag.Title = "Auth";
+    ViewBag.Title = "Book";
     int sayac = 1;
 }
 
-@model List<Library.Data.Entity.Auth>
+@model List<Library.Business.Models.Book.BookWithDetail>
 <!-- Exportable Table -->
 <div class="block-header">
     <h2>
-        Auth
+        Book
     </h2>
 </div>
 <div class="card">
     <div class="header">
         <button id="deleteBtn" type="button" class="btn bg-red waves-effect">DELETE</button>
-        <a href="@Url.Action("Add","Auth")" class="btn bg-red waves-effect">ADD</a>
+        <a href="@Url.Action("Add","Book")" class="btn bg-red waves-effect">ADD</a>
     </div>
     <div class="body">
         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
             <thead>
                 <tr>
                     <th>Select</th>
-                    <th>Code</th>
+                    <th>Category Name</th>
                     <th>Name</th>
+                    <th>Author Name</th>
+                    <th>Author LastName</th>
                     <th>Edit</th>
                 </tr>
             </thead>
-         
+
             <tbody>
-                @foreach (var auth in Model)
+                @foreach (var book in Model)
                 {
-                    <tr>
-                        <td>
-                            <div class="demo-checkbox">
-                                <input type="checkbox" name="selectItem" value="@auth.Id" id="md_checkbox_@sayac" class="filled-in chk-col-red">
-                                <label for="md_checkbox_@sayac"></label>
-                            </div>
-                        </td>
-                        <td>@auth.Code</td>
-                        <td>@auth.Name</td>
-                        <td><a href="@Url.Action("Edit","Auth",new { Id = auth.Id })" class="btn bg-green waves-effect">Edit</a></td>
-                    </tr>
+                <tr>
+                    <td>
+                        <div class="demo-checkbox">
+                            <input type="checkbox" name="selectItem" value="@book.Id" id="md_checkbox_@sayac" class="filled-in chk-col-red">
+                            <label for="md_checkbox_@sayac"></label>
+                        </div>
+                    </td>
+                    <td>@book.Category_Name</td>
+                    <td>@book.Name</td>
+                    <td>@book.AuthorName</td>
+                    <td>@book.AuthorSurname</td>
+                    <td><a href="@Url.Action("Edit","Book",new { Id = book.Id })" class="btn bg-green waves-effect">Edit</a></td>
+                </tr>
                     sayac++;
                 }
             </tbody>
@@ -50,7 +54,7 @@
 <!-- #END# Exportable Table -->
 
 @section scripts{
-    
+
 
     <script type="text/javascript">
         $("#deleteBtn").click(function () {
@@ -72,13 +76,13 @@
                 function () {
             $.ajax({
                 type: "POST",
-                url: "@Url.Action("Delete","Auth")",
+                url: "@Url.Action("Delete", "Book")",
                 data: { data },
                 dataType: "json",
                 success: function (result) {
                     if (result == "1") {
                         swal("Ok", "Deleted!", "success");
-                        window.location.href = "@Url.Action("List","Auth")";
+                        window.location.href = "@Url.Action("List", "Book")";
                     }
                     else if (result == "2") {
                         swal("Error!", "Not Deleted!", "error");

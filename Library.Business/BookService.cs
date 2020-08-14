@@ -1,4 +1,5 @@
 ﻿using Library.Business.Interfaces;
+using Library.Business.Models.Book;
 using Library.Data;
 using Library.Data.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -23,15 +24,37 @@ namespace Library.Business
         {
             using (AppDBContext dbContext = new AppDBContext(_config))
             {
-                return dbContext.Book.ToList();
+                return dbContext.Book.Where(x=>x.IsDeleted==false).ToList();
             }
         }
 
+        public List<BookWithDetail> GetAllWithDetail()
+        {
+            List<BookWithDetail> resultList = null;
+            using (AppDBContext dbContext = new AppDBContext(_config))
+            {
+                //return dbContext.Book.ToList();
+                resultList = (from b in dbContext.Book
+                                           join c in dbContext.Category on b.CategoryId equals c.Id
+                              where b.IsDeleted==false
+                                           select new BookWithDetail()
+                                           {
+                                              Id = b.Id,
+                                              CategoryId = b.CategoryId,
+                                              Name = b.Name,
+                                              AuthorName =b.AuthorName,
+                                              AuthorSurname =b.AuthorSurname,
+                                              
+                                              Category_Name =c.Name
+                                           }).ToList();
+            }
+            return resultList;
+        }
         public Book GetById(int id)
         {
             using (AppDBContext dbContext = new AppDBContext(_config))
             {
-                return dbContext.Book.Where(p => p.Id == id).FirstOrDefault();
+                return dbContext.Book.Where(p => p.Id == id&& p.IsDeleted==false).FirstOrDefault();
             }
         }
 
@@ -82,6 +105,7 @@ namespace Library.Business
                     {
                         book.DeletedBy = deletedBy;
                         book.DeletedDateTime = DateTime.Now;
+                        book.IsDeleted = true;
                         dbContext.Entry(book).State = EntityState.Modified;
                         return dbContext.SaveChanges();
                     }

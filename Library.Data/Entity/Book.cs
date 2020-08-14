@@ -32,6 +32,8 @@ namespace Library.Data.Entity
 
         public int? DeletedBy { get; set; }
         public DateTime? DeletedDateTime { get; set; }
-        
+        public bool IsDeleted { get; set; }
+
+
     }
 }
