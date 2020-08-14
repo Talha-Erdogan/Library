@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Library.Business;
+using Library.Business.Common;
 using Library.Business.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -39,8 +41,7 @@ namespace Library.UI
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
             });
 
-            //Session için IHttpContextAccessor arayüzünün kullanýma açýlmasý
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //Session için 
             services.AddHttpContextAccessor();
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
@@ -83,13 +84,20 @@ namespace Library.UI
 
             app.UseRouting();
 
+            // SessionHelper'a HttpContextAccessor nesnesi ataniyor
+            SessionHelper.Configure(app.ApplicationServices.GetRequiredService<IHttpContextAccessor>());
+
+
+            //config helper'ý configure etmek için
+            ConfigHelper.Configure(Configuration);
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=User}/{action=Login}/{id?}");
             });
         }
     }

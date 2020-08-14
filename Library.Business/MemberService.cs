@@ -39,6 +39,15 @@ namespace Library.Business
             }
             return result;
         }
+        public Member GetByUserNameAndPassword(string userName , string password)
+        {
+            Member result = null;
+            using (AppDBContext dbContext = new AppDBContext(_config))
+            {
+                result = dbContext.Member.Where(a => a.UserName == userName && a.Password== password).AsNoTracking().FirstOrDefault();
+            }
+            return result;
+        }
 
         public int Add(Member record)
         {
@@ -62,5 +71,6 @@ namespace Library.Business
             }
             return result;
         }
+
     }
 }

@@ -1,0 +1,158 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Library.UI.Controllers
+@using Library.Business.Common
+
+
+@model Library.UI.Models.User.LoginViewModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @@version v2.1.12
+* @@link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Library">
+    <meta name="author" content="talha erdogan">
+    <meta name="keyword" content="library">
+    <title>@ViewData["Title"] - Library</title>
+    <!-- Icons-->
+
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- custom theme style -->
+    <style type="text/css">
+        .form-control {
+            border: 1px solid darkgray;
+        }
+
+        .input-group-text {
+            /*border: 1px solid #e4e7ea;*/
+            border: 1px solid darkgray;
+        }
+    </style>
+
+</head>
+<body class="app flex-row align-items-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-group">
+                    <div class="card p-4">
+                        <div class="card-body">
+                            <h1>Login</h1>
+                            <p class="text-muted"></p>
+                            @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "form-horizontal input-sm" }))
+                            {
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="icon-user"></i>
+                                        </span>
+                                    </div>
+                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control input-sm", placeholder = "UserName" })
+
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="icon-lock"></i>
+                                        </span>
+                                    </div>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control input-sm", placeholder = "Password", value = Model.Password })
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <img id="img-captcha" src="~/get-captcha-image" />
+                                                <i class="fa fa-2x fa-refresh" id="iRefresh" style="margin:4px"></i>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="CaptchaCode" asp-for="CaptchaCode" autocomplete="off" maxlength="5" />
+                                            <span asp-validation-for="CaptchaCode" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="btn btn-primary px-4" type="submit" id="btnSubmit" style="background-color: #ff9800 !important">Login</button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "help-block text-danger" })
+                                        <br />
+                                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "help-block text-danger" })
+                                        <br />
+                                        @if (ViewBag.Error != null)
+                                        {
+                                            @Html.Label("Error", ViewBag.Error, new { @class = "help-block text-danger" })
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%; background-color:#ff9800 !important">
+                        <div class="card-body text-center">
+                            <div>
+                                <h2>Library </h2>
+                                <h2>Talha Erdoğan</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+            </div>
+        </div>
+    </div>
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        $('#drpdwnLanguages').change(function () {
+            window.location.href = "/User/ChangeLanguage?language=" + $('#drpdwnLanguages').val();
+        });
+
+
+
+        $("#iRefresh").click(function () {
+            resetCaptchaImage();
+        });
+
+        function resetCaptchaImage() {
+            d = new Date();
+            $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
+        }
+
+
+    </script>
+
+    <!-- jquery validation -->
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+</body>
+</html>

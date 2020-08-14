@@ -9,6 +9,7 @@ namespace Library.Business.Interfaces
     {
         List<Member> GetAll();
         Member GetById(int id);
+        Member GetByUserNameAndPassword(string userName, string password);
         int Add(Member record);
         int Update(Member record);
 
