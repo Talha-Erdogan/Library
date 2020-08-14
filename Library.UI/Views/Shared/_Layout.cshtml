@@ -199,21 +199,18 @@
                             </li>
                         </ul>
                     </li>
-
-                    <li class="active">
-                        <a href="@Url.Action("List","Book")">
-                            <i class="material-icons">layers</i>
-                            <span>Book</span>
-                        </a>
-                    </li>
-                    <li class="active">
+                   
+                    <li class="">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">widgets</i>
-                            <span>Member</span>
+                            <span>Members</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="@Url.Action("List","Member")">Member</a>
+                                <a href="@Url.Action("Add","Member")">Member Add</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("List","Member")">Member List</a>
                             </li>
                             <li>
                                 <a href="@Url.Action("List","BorrowBook")">Received Book List</a>

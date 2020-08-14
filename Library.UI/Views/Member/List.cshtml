@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Member";
+    int sayac = 1;
+}
+
+@model List<Library.Data.Entity.Member>
+<!-- Exportable Table -->
+<div class="block-header">
+    <h2>
+        Member
+    </h2>
+</div>
+<div class="card">
+    <div class="header">
+        
+        <a href="@Url.Action("Add","Member")" class="btn bg-red waves-effect">ADD</a>
+    </div>
+    <div class="body">
+        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+            <thead>
+                <tr>
+                   
+                    <th>Name</th>
+                    <th>LastName</th>
+                    <th>Phone</th>
+                    <th>TC</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+         
+            <tbody>
+                @foreach (var member in Model)
+                {
+                <tr>
+                   
+                    <td>@member.Name</td>
+                    <td>@member.LastName</td>
+                    <td>@member.Phone</td>
+                    <td>@member.TC</td>
+                    <td><a href="@Url.Action("Edit","Member",new { Id = member.Id })" class="btn bg-green waves-effect">Edit</a></td>
+                </tr>
+                    sayac++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+@section scripts{
+    
+
+}
+
+
+
+
+
+
