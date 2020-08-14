@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\MemberImages\" />
-    <Folder Include="wwwroot\theme\css\" />
     <Folder Include="wwwroot\theme\fonts\" />
     <Folder Include="wwwroot\theme\scripts\" />
   </ItemGroup>

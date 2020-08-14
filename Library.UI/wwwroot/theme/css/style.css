@@ -1,5 +1,5 @@
 ﻿/* Navbar ====================================== */
-@import url(materialize.css);
+
 .navbar {
   font-family: "Roboto", sans-serif;
   -webkit-border-radius: 0;
@@ -4964,7 +4964,7 @@ section.content {
       padding-right: 0;
       padding-left: 10px; }
   .input-group .help-info {
-    float: right;
+    float: left;
     font-size: 12px;
     margin-top: 5px;
     color: #999; }
@@ -5000,7 +5000,7 @@ section.content {
       color: #555; }
   .input-group input[type="text"],
   .input-group .form-control {
-    border: none;
+    border: solid #999;
     box-shadow: none;
     padding-left: 0; }
   .input-group .form-control:focus {
@@ -5042,7 +5042,7 @@ section.content {
     border-radius: 0;
     padding-left: 0; }
   .form-group .help-info {
-    float: right;
+    float: left;
     font-size: 12px;
     margin-top: 5px;
     color: #999; }
@@ -7504,7 +7504,7 @@ fieldset[disabled] .form-control {
     white-space: nowrap;
     position: relative;
     border-bottom: 1px solid #e9e9e9;
-    background: url("../images/user-img-background.jpg") no-repeat no-repeat;
+   
     height: 135px; }
     .sidebar .user-info .image {
       margin-right: 12px;

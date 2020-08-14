@@ -75,6 +75,7 @@ namespace Library.Business
             using (AppDBContext dbContext = new AppDBContext(_config))
             {
                 var auth = dbContext.Auth.Where(x => x.Id == id).FirstOrDefault();
+                auth.IsDeleted = true;
                 auth.DeletedBy = deletedBy;
                 auth.DeletedDateTime = DateTime.Now;
                 dbContext.Entry(auth).State = EntityState.Modified;

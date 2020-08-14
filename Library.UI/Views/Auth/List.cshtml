@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Auth";
+    int sayac = 1;
+}
+
+@model List<Library.Data.Entity.Auth>
+<!-- Exportable Table -->
+<div class="block-header">
+    <h2>
+        Auth
+    </h2>
+</div>
+<div class="card">
+    <div class="header">
+        <button id="deleteBtn" type="button" class="btn bg-red waves-effect">DELETE</button>
+        <a href="@Url.Action("Add","Auth")" class="btn bg-red waves-effect">ADD</a>
+    </div>
+    <div class="body">
+        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+         
+            <tbody>
+                @foreach (var auth in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="demo-checkbox">
+                                <input type="checkbox" name="selectItem" value="@auth.Id" id="md_checkbox_@sayac" class="filled-in chk-col-red">
+                                <label for="md_checkbox_@sayac"></label>
+                            </div>
+                        </td>
+                        <td>@auth.Name</td>
+                        <td>@auth.Name</td>
+                        <td><a href="@Url.Action("Edit","Auth",new { Id = auth.Id })" class="btn bg-green waves-effect">Edit</a></td>
+                    </tr>
+                    sayac++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+@section scripts{
+    
+
+    <script type="text/javascript">
+        $("#deleteBtn").click(function () {
+            var data = [];
+            var sayac = 0;
+            $("input[name='selectItem']:checked").each(function () {
+                data[sayac] = $(this).val();
+                sayac++;
+            });
+            swal({
+                title: "Deleting..",
+                text: "Delete?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Delete",
+                closeOnConfirm: false
+            },
+                function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Delete","Auth")",
+                data: { data },
+                dataType: "json",
+                success: function (result) {
+                    if (result == "1") {
+                        swal("Ok", "Deleted!", "success");
+                        window.location.href = "@Url.Action("List","Auth")";
+                    }
+                    else if (result == "2") {
+                        swal("Error!", "Not Deleted!", "error");
+                    }
+                },
+                error: function () {
+                       swal("Error!", "Error!", "error");
+                }
+            });
+        });
+    });
+    </script>
+}
+
+
+
+
+
+

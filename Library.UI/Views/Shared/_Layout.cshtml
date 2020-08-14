@@ -8,24 +8,25 @@
     <!-- Favicon-->
     <link rel="icon" href="~/favicon.ico" type="image/x-icon">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    @*<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">*@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
     <link href="~/theme/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-   
+    <link href="~/theme/css/bootstrap.min.css" rel="stylesheet" />
+
     <!-- Waves Effect Css -->
     <link href="~/theme/css/waves.css" rel="stylesheet" />
     <link href="~/theme/css/waves.min.css" rel="stylesheet" />
-   
+
     <!-- Animation Css -->
     <link href="~/theme/css/animate.css" rel="stylesheet" />
     <link href="~/theme/css/animate.min.css" rel="stylesheet" />
-   
+
+    <link href="~/theme/css/materialize.css" rel="stylesheet" />
     <!-- Morris Chart Css-->
     <link href="~/theme/css/morris.css" rel="stylesheet" />
-   
+
     <!-- Custom Css -->
     <link href="~/theme/css/style.css" rel="stylesheet" />
     <link href="~/theme/css/style.min.css" rel="stylesheet" />
@@ -36,7 +37,9 @@
 
     <!-- Sweet Alert Css -->
     <link href="~/theme/css/sweetalert.css" rel="stylesheet" />
-   
+
+    @RenderSection("styles", required: false)
+
 </head>
 <body class="theme-orange">
     <!-- Page Loader -->
@@ -99,7 +102,7 @@
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:black;">Talha ERDOĞAN</div>
                     <div class="email" style="color:black;">https://github.com/Talha-Erdogan</div>
-                  
+
                 </div>
             </div>
             <!-- #User Info -->
@@ -108,17 +111,41 @@
                 <ul class="list">
                     <li class="header">Menu</li>
                     <li class="active">
-                        <a href="#">
+                        <a href="@Url.Action("Index","Home")">
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="@Url.Action("List","Category")">
-                            <i class="material-icons">text_fields</i>
-                            <span>Category</span>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Auths</span>
                         </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="@Url.Action("Add","Auth")">Auth Add</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("List","Auth")">Auth List</a>
+                            </li>
+                        </ul>
                     </li>
+
+                    <li class="active">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Categories</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="@Url.Action("Add","Category")">Category Add</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("List","Category")">Category List</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="active">
                         <a href="@Url.Action("List","Book")">
                             <i class="material-icons">layers</i>
@@ -142,7 +169,7 @@
                             </li>
                         </ul>
                     </li>
-                   
+
                 </ul>
             </div>
             <!-- #Menu -->
@@ -151,12 +178,12 @@
                 <div class="copyright">
                     &copy; @DateTime.Now.Year <a href="javascript:void(0);">Design By Talha ERDOĞAN</a>.
                 </div>
-                
+
             </div>
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->
-        
+
     </section>
     <section class="content">
         <div class="container-fluid">
@@ -168,18 +195,18 @@
     <script src="~/theme/scripts/jquery.js"></script>
     <script src="~/theme/scripts/jquery.min.js"></script>
     <script src="~/theme/scripts/jquery.js"></script>
-   
+
     <!-- Bootstrap Core Js -->
     <script src="~/theme/scripts/bootstrap.js"></script>
     <script src="~/theme/scripts/bootstrap.min.js"></script>
-   
+
     <!-- Select Plugin Js -->
     <script src="~/theme/scripts/bootstrap-select.min.js"></script>
     <script src="~/theme/scripts/bootstrap-select.js"></script>
-    
+
     <!-- Slimscroll Plugin Js -->
     <script src="~/theme/scripts/jquery.slimscroll.js"></script>
-   
+
     <!-- Waves Effect Plugin Js -->
     <script src="~/theme/scripts/waves.js"></script>
     <script src="~/theme/scripts/waves.min.js"></script>
@@ -188,6 +215,23 @@
     <script src="~/theme/scripts/admin.js"></script>
 
     <script src="~/theme/scripts/sweetalert.min.js"></script>
+
+
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="~/theme/scripts/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="~/theme/scripts/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/theme/scripts/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="~/theme/scripts/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="~/theme/scripts/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="~/theme/scripts/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="~/theme/scripts/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="~/theme/scripts/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="~/theme/scripts/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="~/theme/scripts/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="~/theme/scripts/jquery-datatable.js"></script>
+
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

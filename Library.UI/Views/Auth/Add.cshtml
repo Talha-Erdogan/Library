@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Add Auth";
+}
+@model Library.UI.Models.Auth.AddViewModel
+<style>
+    .dropdown-toggle {
+        display: none;
+        border-bottom: solid 1px #aaa;
+    }
+</style>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>Add Auth</h2>
+            </div>
+            <div class="body">
+                @using (Html.BeginForm("Add", "Auth", FormMethod.Post))
+                {
+
+                <div class="form-group form-float">
+                    <div class="help-info" style="float:left;">Code</div>
+                    <div class="form-line">
+                        @Html.TextBoxFor(m => m.Code, new { @class = "form-control",@style= "border:solid #999; padding-left:10px;" })
+                        @Html.ValidationMessageFor(m => m.Code)
+                    </div>
+
+                </div>
+
+                <div class="form-group form-float">
+                    <div class="help-info">Name</div>
+                    <div class="form-line">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+
+                </div>
+
+                    <input type="submit" id="send" value="Add" class="btn bg-red waves-effect" />
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            var Issucces = '@ViewBag.Issuccess';
+            if (Issucces=="True") {
+                swal({
+                    title: "Added!",
+                    text: "Added successfully!!",
+                    type: "success"
+                    }, function() {
+                        window.location.href = "@Url.Action("List","Auth")";
+                    });
+            }
+            else if (Issucces=="False") {
+                swal({
+                    title: "Error!",
+                    text: "An error occurred!",
+                    type: "error"
+                    });
+            }
+            else {
+            }
+        });
+    </script>
+}

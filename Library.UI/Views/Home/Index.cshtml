@@ -2,7 +2,24 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+@section styles{
+    <style>
+        body {
+            background-image: url("/theme/images/user-img-background.jpg");
+            /* Full height */
+            height: 80%;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        body, html {
+            height: 80%;
+        }
+    </style>
+}
+
+
+
