@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Add Borrowed Book";
+}
+@model Library.UI.Models.BorrowBook.AddViewModel
+<style>
+    .dropdown-toggle {
+        display: none;
+        border-bottom: solid 1px #aaa;
+    }
+
+    .bootstrap-select {
+        padding: 0px;
+    }
+</style>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>Add Borrowed Book</h2>
+            </div>
+            <div class="body">
+                @using (Html.BeginForm("Add", "BorrowBook", FormMethod.Post))
+                {
+                    <div class="form-group form-float">
+                        <div class="help-info">Member Name</div>
+                        @Html.DropDownListFor(m => m.MemberId, Model.MemberList, "Select", new { @class = "form-control", @style = "border:none !important; padding:0px;" })
+                        @Html.ValidationMessageFor(m => m.MemberId)
+
+                    </div>
+
+                    <div class="form-group form-float">
+                        <div class="help-info">Book Name</div>
+                        @Html.DropDownListFor(m => m.BookId, Model.BookList, "Select", new { @class = "form-control", @style = "border:none !important; padding:0px;" })
+                        @Html.ValidationMessageFor(m => m.BookId)
+
+                    </div>
+
+                    <div class="form-group form-float">
+                        <div class="help-info">Expiration Date</div>
+                        <div class="form-line">
+                            @Html.TextBoxFor(m => m.ExpirationDate, new { @class = "form-control", @type = "text", @readonly = "true" })
+                            @Html.ValidationMessageFor(m => m.ExpirationDate)
+                        </div>
+
+                    </div>
+
+                    <input type="submit" id="send" value="Add" class="btn bg-red waves-effect" />
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            var Issucces = '@ViewBag.Issuccess';
+            if (Issucces=="True") {
+                swal({
+                    title: "Added!",
+                    text: "Added successfully!!",
+                    type: "success"
+                    }, function() {
+                        window.location.href = "@Url.Action("List","BorrowBook")";
+                    });
+            }
+            else if (Issucces=="False") {
+                swal({
+                    title: "Error!",
+                    text: "An error occurred!",
+                    type: "error"
+                    });
+            }
+                else if (Issucces=="Penal") {
+                swal({
+                    title: "Error!",
+                    text: "Suspended Member!",
+                    type: "error"
+                    });
+            }
+            else {
+            }
+        });
+    </script>
+}

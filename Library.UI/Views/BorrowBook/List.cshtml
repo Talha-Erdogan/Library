@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Borrowed Book List";
+    int sayac = 1;
+}
+
+@model List<Library.Business.Models.BorrowBook.BorrowBookWithDetail>
+<!-- Exportable Table -->
+<div class="block-header">
+    <h2>
+        Borrowed Book List
+    </h2>
+</div>
+<div class="card">
+    <div class="header">
+        <button id="deleteBtn" type="button" class="btn bg-red waves-effect">DELETE</button>
+        <a href="@Url.Action("Add","BorrowBook")" class="btn bg-red waves-effect">ADD</a>
+    </div>
+    <div class="body">
+
+        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+            <thead>
+                <tr>
+                   
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>TC</th>
+                    <th>Phone</th>
+                    <th>Book Name</th>
+                    <th>Created Date</th>
+                    <th>Expiration Date</th>
+                    <th>Is Bring</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var borrowBook in Model)
+                {
+                    <tr>
+                        
+                        <td>@borrowBook.Member_Name</td>
+                        <td>@borrowBook.Member_LastName</td>
+                        <td>@borrowBook.Member_TC</td>
+                        <td>@borrowBook.Member_Phone</td>
+                        <td>@borrowBook.Book_Name</td>
+                        <td>@borrowBook.CreatedDateTime.ToString("d MMMM yyyy")</td>
+                        <td>@borrowBook.ExpirationDateTime.ToString("d MMMM yyyy")</td>
+                        <td><button name="isBring" value="@borrowBook.Id" class="btn bg-green waves-effect">Is Bring</button></td>
+                    </tr>
+                    sayac++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+@section scripts{
+    <script type="text/javascript">
+
+
+       $("button[name=isBring]").click(function () {
+          
+            mdl = $(this).val();
+            swal({
+                title: "Are you sure?",
+                text: "Do You Confirm?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Approve",
+                closeOnConfirm: false
+            },
+            function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Brought","BorrowBook")",
+                    data: JSON.stringify(mdl),
+                    dataType: "json",
+                    contentType: "application/x-www-form-urlencoded",
+                    success: function (rslt) {
+                        if (rslt == "1") {
+                            swal("Success", "Marked as Fetched!", "success");
+                             window.location.href = "@Url.Action("List","BorrowBook")";
+                        }
+                    },
+                    error: function (rslt) {
+                        swal("Error", "An error occurred!", "error");
+                    }
+                    });
+                });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

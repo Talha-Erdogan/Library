@@ -277,11 +277,36 @@
                                 }
 
                                 @*<li>
-                                        <a href="@Url.Action("List","BorrowBook")">Received Book List</a>
+                        <a href="@Url.Action("List","BorrowBook")">Received Book List</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("BroughtBookList","BorrowBook")">Brought Book List</a>
+                    </li>*@
+                            </ul>
+                        </li>
+                    }
+
+                    @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_BORROWEDBOOK_LIST, AuthCodeStatic.PAGE_BROUGHTBOOK_LIST }))
+                    {
+                        <li class="">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">widgets</i>
+                                <span>Book Operations</span>
+                            </a>
+                            <ul class="ml-menu">
+
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_BORROWEDBOOK_LIST }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("List","BorrowBook")">Borrow Book List</a>
                                     </li>
+                                }
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_BROUGHTBOOK_LIST }))
+                                {
                                     <li>
                                         <a href="@Url.Action("BroughtBookList","BorrowBook")">Brought Book List</a>
-                                    </li>*@
+                                    </li>
+                                }
                             </ul>
                         </li>
                     }

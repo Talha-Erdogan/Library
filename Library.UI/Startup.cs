@@ -60,7 +60,10 @@ namespace Library.UI
             services.AddTransient<IProfileService, ProfileService>();
             services.AddTransient<IProfileDetailService, ProfileDetailService>();
             services.AddTransient<IProfileMemberService, ProfileMemberService>();
-           
+
+            //https://stackoverflow.com/questions/58885384/the-json-value-could-not-be-converted-to-system-nullablesystem-int32
+            services.AddControllers().AddNewtonsoftJson();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "Brought Book List";
+    int sayac = 1;
+}
+
+@model List<Library.Business.Models.BorrowBook.BorrowBookWithDetail>
+<!-- Exportable Table -->
+<div class="block-header">
+    <h2>
+        Borrowed Book List
+    </h2>
+</div>
+<div class="card">
+    <div class="header">
+        <button id="bringBtn" type="button" class="btn bg-red waves-effect">Not Bring</button>
+        @*<button id="deleteBtn" type="button" class="btn bg-red waves-effect">DELETE</button>
+            <a href="@Url.Action("Add","Brought")" class="btn bg-red waves-effect">ADD</a>*@
+        @*<ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0);">Action</a></li>
+                        <li><a href="javascript:void(0);">Another action</a></li>
+                        <li><a href="javascript:void(0);">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>*@
+    </div>
+    <div class="body">
+        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>TC</th>
+                    <th>Phone</th>
+                    <th>Book Name</th>
+                    <th>Created Date</th>
+                    <th>Expiration Date</th>
+                    <th>Bring</th>
+                </tr>
+            </thead>
+          
+            <tbody>
+                @foreach (var borrowBook in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="demo-checkbox">
+                                <input type="checkbox" name="selected" value="@borrowBook.Id" id="md_checkbox_@sayac" class="filled-in chk-col-red">
+                                <label for="md_checkbox_@sayac"></label>
+                            </div>
+                        </td>
+                        <td>@borrowBook.Member_Name</td>
+                        <td>@borrowBook.Member_LastName</td>
+                        <td>@borrowBook.Member_TC</td>
+                        <td>@borrowBook.Member_Phone</td>
+                        <td>@borrowBook.Book_Name</td>
+                        <td>@borrowBook.CreatedDateTime.ToString("d MMMM yyyy")</td>
+                        <td>@borrowBook.ExpirationDateTime.ToString("d MMMM yyyy")</td>
+                        <td>@borrowBook.IsBring</td>
+                    </tr>
+                    sayac++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+@section scripts{
+
+
+    <script src="~/Scripts/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="~/Scripts/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="~/Scripts/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="~/Scripts/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="~/Scripts/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="~/Scripts/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="~/Scripts/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="~/Scripts/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="~/Scripts/jquery-datatable.js"></script>
+
+
+
+    <script type="text/javascript">
+         $("#bringBtn").click(function () {
+            var data = [];
+            var sayac = 0;
+            $("input[name='selected']:checked").each(function () {
+                data[sayac] = $(this).val();
+                sayac++;
+            });
+            swal({
+                title: "Editing..",
+                text: "Book will be flagged as not bring?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Edit",
+                closeOnConfirm: false
+            },
+            function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("BroughtBookEdit", "BorrowBook")",
+                    data: { data },
+                    dataType: "json",
+                    success: function (result) {
+                    if (result == "1") {
+                        swal("Ok", "Edit!", "success");
+                        window.location.href = "@Url.Action("BroughtBookList","BorrowBook")";
+                    }
+                    else if (result == "2") {
+                        swal("Error!", "Not Editing!", "error");
+                    }
+                },
+                error: function () {
+                    swal("Error!", "Not Editing!", "error");
+                }
+            });
+        });
+    });
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
