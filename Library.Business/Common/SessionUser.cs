@@ -17,6 +17,7 @@ namespace Library.Business.Common
         public string LastName { get; set; }
 
         public string Phone { get; set; }
+        public string ImageFilePath { get; set; }
 
         public List<Auth> AuthList { get; set; }
         public List<Profile> ProfileList { get; set; }

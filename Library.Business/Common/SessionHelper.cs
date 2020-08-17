@@ -138,6 +138,7 @@ namespace Library.Business.Common
             currentUser.Name = existMember.Name;
             currentUser.LastName = existMember.LastName;
             currentUser.Phone = existMember.Phone;
+            currentUser.ImageFilePath = existMember.ImageFilePath;
 
             currentUser.AuthList = profileDetailService.GetAllAuthByCurrentUser(currentUser.ID);
 
