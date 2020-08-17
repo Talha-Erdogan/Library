@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Business.Enums;
 using Library.Business.Interfaces;
 using Library.Data.Entity;
+using Library.UI.Filters;
 using Library.UI.Models.Category;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +18,8 @@ namespace Library.UI.Controllers
         {
             _categoryService = categoryService;
         }
+
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_CATEGORY_LIST)]
         public IActionResult List()
         {
             List<Category> model = new List<Category>();
@@ -23,6 +27,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_CATEGORY_ADD)]
         public ActionResult Add(string IsSuccess)
         {
             ViewBag.Issuccess = IsSuccess ?? "Empty";
@@ -30,6 +35,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_CATEGORY_ADD)]
         [HttpPost]
         public ActionResult Add(AddViewModel model)
         {
@@ -50,6 +56,7 @@ namespace Library.UI.Controllers
             }
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_CATEGORY_EDIT)]
         public ActionResult Edit(int id, string IsSuccess)
         {
             ViewBag.Issuccess = IsSuccess ?? "Empty";
@@ -65,6 +72,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_CATEGORY_EDIT)]
         [HttpPost]
         public ActionResult Edit(AddViewModel model)
         {

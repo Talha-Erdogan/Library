@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Business.Enums;
 using Library.Business.Interfaces;
 using Library.Data.Entity;
+using Library.UI.Filters;
 using Library.UI.Models.Member;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -22,6 +24,7 @@ namespace Library.UI.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_MEMBER_LIST)]
         public IActionResult List()
         {
             List<Member> model = new List<Member>();
@@ -29,7 +32,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
-        
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_MEMBER_ADD)]
         public ActionResult Add(string IsSuccess)
         {
             ViewBag.Issuccess = IsSuccess ?? "Empty";
@@ -37,6 +40,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_MEMBER_ADD)]
         [HttpPost]
         public ActionResult Add(Models.Member.AddViewModel model, IFormFile imageFilePath)
         {
@@ -108,6 +112,7 @@ namespace Library.UI.Controllers
             
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_MEMBER_EDIT)]
         public ActionResult Edit(int id, string IsSuccess)
         {
             ViewBag.Issuccess = IsSuccess ?? "Empty";
@@ -134,6 +139,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_MEMBER_EDIT)]
         [HttpPost]
         public ActionResult Edit(AddViewModel model, IFormFile imageFilePath)
         {

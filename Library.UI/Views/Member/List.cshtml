@@ -20,7 +20,8 @@
         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
             <thead>
                 <tr>
-                   
+
+                    <th>User Name</th>
                     <th>Name</th>
                     <th>LastName</th>
                     <th>Phone</th>
@@ -33,7 +34,8 @@
                 @foreach (var member in Model)
                 {
                 <tr>
-                   
+
+                    <td>@member.UserName</td>
                     <td>@member.Name</td>
                     <td>@member.LastName</td>
                     <td>@member.Phone</td>

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Library.Business.Common
+@using Library.Business.Enums
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -116,110 +118,166 @@
                             <span>Home</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">widgets</i>
-                            <span>Auths</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="@Url.Action("Add","Auth")">Auth Add</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("List","Auth")">Auth List</a>
-                            </li>
-                        </ul>
-                    </li>
+                    @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_AUTH_LIST, AuthCodeStatic.PAGE_AUTH_ADD }))
+                    {
+                        <li class="">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">widgets</i>
+                                <span>Auths</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_AUTH_ADD }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Add","Auth")">Auth Add</a>
+                                    </li>
+                                }
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_AUTH_LIST }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("List","Auth")">Auth List</a>
+                                    </li>
+                                }
 
-                    <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">widgets</i>
-                            <span>Categories</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="@Url.Action("Add","Category")">Category Add</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("List","Category")">Category List</a>
-                            </li>
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    }
 
-                    <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">widgets</i>
-                            <span>Books</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="@Url.Action("Add","Book")">Book Add</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("List","Book")">Book List</a>
-                            </li>
-                        </ul>
-                    </li>
+                    @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_CATEGORY_LIST, AuthCodeStatic.PAGE_CATEGORY_ADD }))
+                    {
+                        <li class="">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">widgets</i>
+                                <span>Categories</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_CATEGORY_ADD }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Add","Category")">Category Add</a>
+                                    </li>
+                                }
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_CATEGORY_LIST }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("List","Category")">Category List</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
 
-                    <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">widgets</i>
-                            <span>Profiles</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="@Url.Action("Add","Profile")">Profile Add</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("List","Profile")">Profile List</a>
-                            </li>
-                        </ul>
-                    </li>
+                    @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_BOOK_LIST, AuthCodeStatic.PAGE_BOOK_ADD }))
+                    {
+                        <li class="">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">widgets</i>
+                                <span>Books</span>
+                            </a>
+                            <ul class="ml-menu">
 
-                    <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">widgets</i>
-                            <span>Profile Details</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="@Url.Action("BatchEdit","ProfileDetail")">Profile Detail</a>
-                            </li>
-                        </ul>
-                    </li>
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_BOOK_ADD }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Add", "Book")">Book Add</a>
+                                    </li>
+                                }
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_BOOK_LIST }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("List","Book")">Book List</a>
+                                    </li>
 
-                    <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">widgets</i>
-                            <span>Profile Members</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="@Url.Action("BatchEdit","ProfileMember")">Profile Member</a>
-                            </li>
-                        </ul>
-                    </li>
-                   
-                    <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">widgets</i>
-                            <span>Members</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="@Url.Action("Add","Member")">Member Add</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("List","Member")">Member List</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("List","BorrowBook")">Received Book List</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("BroughtBookList","BorrowBook")">Brought Book List</a>
-                            </li>
-                        </ul>
-                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                    @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_PROFILE_LIST, AuthCodeStatic.PAGE_PROFILE_ADD }))
+                    {
+                        <li class="">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">widgets</i>
+                                <span>Profiles</span>
+                            </a>
+                            <ul class="ml-menu">
+
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_PROFILE_ADD }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Add","Profile")">Profile Add</a>
+                                    </li>
+                                }
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_PROFILE_LIST }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("List","Profile")">Profile List</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                    @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_PROFILEDETAIL_BATCHEDIT }))
+                    {
+                        <li class="">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">widgets</i>
+                                <span>Profile Details</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a href="@Url.Action("BatchEdit","ProfileDetail")">Profile Detail</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_PROFILEMEMBER_BATCHEDIT }))
+                    {
+                        <li class="">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">widgets</i>
+                                <span>Profile Members</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a href="@Url.Action("BatchEdit","ProfileMember")">Profile Member</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_MEMBER_LIST, AuthCodeStatic.PAGE_MEMBER_ADD }))
+                    {
+                        <li class="">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">widgets</i>
+                                <span>Members</span>
+                            </a>
+                            <ul class="ml-menu">
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_MEMBER_ADD }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Add","Member")">Member Add</a>
+                                    </li>
+                                }
+                                @if (SessionHelper.CheckAuthForCurrentUser(new string[] { AuthCodeStatic.PAGE_MEMBER_LIST }))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("List","Member")">Member List</a>
+                                    </li>
+                                }
+
+                                @*<li>
+                                        <a href="@Url.Action("List","BorrowBook")">Received Book List</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("BroughtBookList","BorrowBook")">Brought Book List</a>
+                                    </li>*@
+                            </ul>
+                        </li>
+                    }
 
                 </ul>
             </div>

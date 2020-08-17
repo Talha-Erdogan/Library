@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Business.Enums;
 using Library.Business.Interfaces;
 using Library.Business.Models.Book;
 using Library.Data.Entity;
+using Library.UI.Filters;
 using Library.UI.Models.Book;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,6 +25,7 @@ namespace Library.UI.Controllers
             _categoryService = categoryService;
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_BOOK_LIST)]
         public IActionResult List()
         {
             List<BookWithDetail> model = new List<BookWithDetail>();
@@ -30,6 +33,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_BOOK_ADD)]
         public ActionResult Add(string IsSuccess)
         {
             ViewBag.Issuccess = IsSuccess ?? "Empty";
@@ -39,6 +43,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_BOOK_ADD)]
         [HttpPost]
         public ActionResult Add(AddViewModel model)
         {
@@ -68,6 +73,7 @@ namespace Library.UI.Controllers
             }
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_BOOK_EDIT)]
         public ActionResult Edit(int id, string IsSuccess)
         {
             ViewBag.Issuccess = IsSuccess ?? "Empty";
@@ -87,6 +93,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_BOOK_EDIT)]
         [HttpPost]
         public ActionResult Edit(AddViewModel model)
         {
@@ -113,6 +120,7 @@ namespace Library.UI.Controllers
             }
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_BOOK_DELETE)]
         [HttpPost]
         public JsonResult Delete(int[] data)
         {

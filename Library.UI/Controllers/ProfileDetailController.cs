@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Business.Enums;
 using Library.Business.Interfaces;
 using Library.Data.Entity;
+using Library.UI.Filters;
 using Library.UI.Models.ProfileDetail;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,7 +22,7 @@ namespace Library.UI.Controllers
             _profileService = profileService;
         }
 
-        
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_PROFILEDETAIL_BATCHEDIT)]
         public ActionResult BatchEdit()
         {
             BatchEditViewModel model = new BatchEditViewModel();
@@ -30,6 +32,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_PROFILEDETAIL_BATCHEDIT)]
         [HttpPost]
         
         public ActionResult BatchEdit(BatchEditViewModel model)

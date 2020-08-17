@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Business.Enums;
 using Library.Business.Interfaces;
 using Library.Data.Entity;
+using Library.UI.Filters;
 using Library.UI.Models.Auth;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,13 +19,15 @@ namespace Library.UI.Controllers
             _authService = authService;
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_AUTH_LIST)]
         public IActionResult List()
         {
             List<Auth> model = new List<Auth>();
             model = _authService.GetAll();
             return View(model);
         }
-       
+
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_AUTH_ADD)]
         public ActionResult Add(string IsSuccess)
         {
             ViewBag.Issuccess = IsSuccess ?? "Empty";
@@ -32,6 +36,7 @@ namespace Library.UI.Controllers
         }
 
         [HttpPost]
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_AUTH_ADD)]
         public ActionResult Add(AddViewModel model)
         {
             if (!ModelState.IsValid)
@@ -54,6 +59,7 @@ namespace Library.UI.Controllers
             }
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_AUTH_EDIT)]
         public ActionResult Edit(int id, string IsSuccess)
         {
             ViewBag.Issuccess = IsSuccess ?? "Empty";
@@ -70,6 +76,7 @@ namespace Library.UI.Controllers
             return View(model);
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_AUTH_EDIT)]
         [HttpPost]
         public ActionResult Edit(AddViewModel model)
         {
@@ -92,6 +99,7 @@ namespace Library.UI.Controllers
             }
         }
 
+        [AppAuthorizeFilter(AuthCodeStatic.PAGE_AUTH_DELETE)]
         [HttpPost]
         public JsonResult Delete(int[] data)
         {
