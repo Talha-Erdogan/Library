@@ -19,3 +19,4 @@ Kullanılan Teknolojiler:
 - Sql
 - Entity Framework
 - Dependency Injection
+- Ajax-Jquery kullanım örneklerini içermektedir.
