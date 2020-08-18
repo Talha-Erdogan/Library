@@ -12,7 +12,7 @@
 </div>
 <div class="card">
     <div class="header">
-        <button id="deleteBtn" type="button" class="btn bg-red waves-effect">DELETE</button>
+      
         <a href="@Url.Action("Add","BorrowBook")" class="btn bg-red waves-effect">ADD</a>
     </div>
     <div class="body">
@@ -20,7 +20,7 @@
         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
             <thead>
                 <tr>
-                   
+
                     <th>Name</th>
                     <th>Last Name</th>
                     <th>TC</th>
@@ -35,7 +35,7 @@
                 @foreach (var borrowBook in Model)
                 {
                     <tr>
-                        
+
                         <td>@borrowBook.Member_Name</td>
                         <td>@borrowBook.Member_LastName</td>
                         <td>@borrowBook.Member_TC</td>
@@ -56,10 +56,11 @@
 @section scripts{
     <script type="text/javascript">
 
+        
 
        $("button[name=isBring]").click(function () {
-          
-            mdl = $(this).val();
+           var data = [];
+           data[0] = $(this).val();
             swal({
                 title: "Are you sure?",
                 text: "Do You Confirm?",
@@ -69,13 +70,13 @@
                 confirmButtonText: "Approve",
                 closeOnConfirm: false
             },
-            function () {
+                function () {
+                    
                 $.ajax({
                     type: "POST",
                     url: "@Url.Action("Brought","BorrowBook")",
-                    data: JSON.stringify(mdl),
+                    data: { data },
                     dataType: "json",
-                    contentType: "application/x-www-form-urlencoded",
                     success: function (rslt) {
                         if (rslt == "1") {
                             swal("Success", "Marked as Fetched!", "success");

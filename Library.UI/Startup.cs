@@ -64,6 +64,14 @@ namespace Library.UI
             //https://stackoverflow.com/questions/58885384/the-json-value-could-not-be-converted-to-system-nullablesystem-int32
             services.AddControllers().AddNewtonsoftJson();
 
+            //http isteginde bulunmak için kullanýlýr.
+            //https://docs.microsoft.com/tr-tr/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1
+            services.AddHttpClient();
+
+
+            //newtonsoft ekleme-ajax methodlarýnda verileri okuyamýyorduk
+            //https://stackoverflow.com/questions/60535734/when-posting-to-an-asp-net-core-3-1-web-app-frombodymyclass-data-is-often-n
+            services.AddRazorPages().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,6 +89,10 @@ namespace Library.UI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseForwardedHeaders();
+            // https://stackoverflow.com/questions/51394593/how-to-access-server-variables-in-asp-net-core-2-x
+            // https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-2.2#forwarded-headers
 
             // session kullanýmý
             app.UseSession(); //make sure add this line before UseMvc()

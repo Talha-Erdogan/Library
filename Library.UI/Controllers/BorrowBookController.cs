@@ -81,12 +81,12 @@ namespace Library.UI.Controllers
 
 
         [HttpPost]
-        public JsonResult Brought(string id)
+        public JsonResult Brought(int[] data)
         {
             try
             {
-                int bookId = Convert.ToInt32(id);
-                var borrowBook = _borrowBookService.GetBorrowBookById(bookId);
+               // int bookId = Convert.ToInt32(id);
+                var borrowBook = _borrowBookService.GetBorrowBookById(data[0]);
 
                 if (DateTime.Now > borrowBook.ExpirationDateTime)
                 {
