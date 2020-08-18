@@ -15,7 +15,7 @@ Proje katmanlarından kısaca bahsedecek olursak;
 
 Kullanılan Teknolojiler:
 
-Asp.Net Core Mvc(3.1)
-Sql
-Entity Framework
-Dependency Injection
+- Asp.Net Core Mvc(3.1)
+- Sql
+- Entity Framework
+- Dependency Injection
